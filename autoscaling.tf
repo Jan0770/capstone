@@ -6,7 +6,7 @@ resource "aws_autoscaling_group" "nf_asg" {
     target_group_arns   = [aws_lb_target_group.nf_lb_tg.id]
     
     depends_on = [
-      aws_security_group.allow_ssh
+      aws_security_group.ssh_ingress
     ]
 
     launch_template {
@@ -20,15 +20,15 @@ resource "aws_launch_template" "nf_launchtemplate" {
     image_id        = "ami-0df24e148fdb9f1d8"
     instance_type   = "t3.micro"
     key_name        = "vockey"
-    user_data       =  base64encode(file("install_wp.sh"))
-    vpc_security_group_ids = [aws_security_group.allow_ssh.id, aws_security_group.allow_web.id]
+    user_data       =  base64encode(file("dockerWPuserdata.sh"))
+    vpc_security_group_ids = [aws_security_group.ssh_ingress.id, aws_security_group.allow_web.id]
 
     monitoring {
       enabled = true
     }
 
     depends_on = [
-      aws_security_group.allow_ssh
+      aws_security_group.ssh_ingress
     ]
 } 
 

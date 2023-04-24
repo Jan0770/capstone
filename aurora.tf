@@ -33,9 +33,3 @@ resource "aws_rds_cluster_instance" "clusterinstance" {
     Name = "auroracluster-db-instance${count.index + 1}"
   }
 }
-
-
-module "rds_aurora_multi-az" {
-  source  = "terraform-aws-modules/rds-aurora/aws//examples/multi-az"
-  version = "7.7.0"
-}

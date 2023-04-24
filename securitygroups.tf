@@ -1,5 +1,5 @@
-resource "aws_security_group" "ssh-ingress" {
-  name        = "ssh-ingress"
+resource "aws_security_group" "ssh_ingress" {
+  name        = "ssh_ingress"
   description = "Allow SSH ingress"
   vpc_id      = aws_vpc.nf_vpc.id
 
@@ -12,7 +12,7 @@ resource "aws_security_group" "ssh-ingress" {
   }
 
   tags = {
-    Name = "ssh-ingress"
+    Name = "ssh_ingress"
   }
 }
 
@@ -67,7 +67,7 @@ resource "aws_security_group" "allow_aurora_access" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    security_groups = [aws_security_group.allow_ssh.id] 
+    security_groups = [aws_security_group.ssh_ingress.id] 
   }
 
   tags = {
