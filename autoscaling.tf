@@ -2,7 +2,7 @@ resource "aws_autoscaling_group" "nf_asg" {
     name        = "nf-autoscaling"
     min_size    = 2
     max_size    = 6
-    vpc_zone_identifier = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
+    vpc_zone_identifier = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
     target_group_arns   = [aws_lb_target_group.nf_lb_tg.id]
     
     depends_on = [
@@ -17,12 +17,12 @@ resource "aws_autoscaling_group" "nf_asg" {
 
 resource "aws_launch_template" "nf_launchtemplate" {
     name            = "nf-launchtemplate"
-    image_id        = "ami-0df24e148fdb9f1d8"
-    instance_type   = "t3.micro"
-    key_name        = "vockey"
+    image_id        = var.ami
+    instance_type   = var.instance_type
+    key_name        = var.ssh_key
     user_data       =  base64encode(file("dockerWPuserdata.sh"))
-    vpc_security_group_ids = [aws_security_group.ssh_ingress.id, aws_security_group.allow_web.id]
-
+    vpc_security_group_ids = [aws_security_group.ssh_ingress.id, aws_security_group.allow_http.id]
+    
     monitoring {
       enabled = true
     }

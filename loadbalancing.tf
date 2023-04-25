@@ -1,9 +1,9 @@
 resource "aws_lb" "nf_lb" {
     name                = "load-balancer"
     load_balancer_type  = "application"
-    security_groups     = [aws_security_group.ssh_ingress.id, aws_security_group.allow_web.id]
+    security_groups     = [aws_security_group.ssh_ingress.id, aws_security_group.allow_http.id]
     internal            = false
-    subnets             = [aws_subnet.public_subnet_1.id, aws_subnet.public_subnet_2.id]
+    subnets             = [aws_subnet.private_subnet_1.id, aws_subnet.private_subnet_2.id]
     
     depends_on = [
       aws_vpc.nf_vpc

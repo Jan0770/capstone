@@ -12,6 +12,11 @@ variable "ami" {
   default     = "ami-009c5f630e96948cb"
 }
 
+variable "instance_type" {
+  description = "EC2 instance type"
+  default = "t3.micro"
+}
+
 variable "prefix" {
   description = "Prefix can be used for creating resoures"
   default     = "wordpress"
@@ -22,7 +27,7 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "availability-zones" {
+variable "availability_zones" {
     description = "AZs for this project"
     default = ["us-west-2a", "us-west-2b"]
 }
@@ -90,7 +95,7 @@ variable "rds_instance_class" {
 # AuroraDB
 variable "aurora_engine" {
     description = "aurora engine"
-    default     = "aurora-msql"
+    default     = "aurora-mysql"
   
 }
 

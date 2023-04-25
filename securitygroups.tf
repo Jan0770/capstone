@@ -10,19 +10,19 @@ resource "aws_security_group" "ssh_ingress" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
-
+  
   tags = {
     Name = "ssh_ingress"
   }
 }
 
-resource "aws_security_group" "allow_web" {
-  name        = "allow_web"
-  description = "Allow web traffic"
+resource "aws_security_group" "allow_http" {
+  name        = "allow_http"
+  description = "Allow http traffic"
   vpc_id      = aws_vpc.nf_vpc.id
 
   ingress {
-    description      = "allow web"
+    description      = "allow http"
     from_port        = 80
     to_port          = 80
     protocol         = "tcp"
@@ -30,47 +30,47 @@ resource "aws_security_group" "allow_web" {
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "allow_web"
-  }
-}
-
-resource "aws_security_group" "allow_ec2_aurora" {
-  name        = "allow_ec2_aurora"
-  description = "Allow EC2 to Aurora traffic"
-  vpc_id      = aws_vpc.nf_vpc.id
-
-  egress {
-    from_port        = 3306
-    to_port          = 3306
+    from_port        = 80
+    to_port          = 80
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name = "allow_ssh"
+    Name = "allow_http"
   }
 }
 
-resource "aws_security_group" "allow_aurora_access" {
-  name        = "allow_aurora_access"
-  description = "Allow EC2 to aurora"
-  vpc_id = aws_vpc.nf_vpc.id
+# resource "aws_security_group" "allow_ec2_aurora" {
+#   name        = "allow_ec2_aurora"
+#   description = "Allow EC2 to Aurora traffic"
+#   vpc_id      = aws_vpc.nf_vpc.id
 
-  ingress {
-    from_port   = 3306
-    to_port     = 3306
-    protocol    = "tcp"
-    security_groups = [aws_security_group.ssh_ingress.id] 
-  }
+#   egress {
+#     from_port        = 3306
+#     to_port          = 3306
+#     protocol         = "tcp"
+#     cidr_blocks      = ["0.0.0.0/0"]
+#   }
 
-  tags = {
-    Name = "aurora-stack-allow-aurora-MySQL"
-  }
-}
+#   tags = {
+#     Name = "allow_ssh"
+#   }
+# }
+
+# resource "aws_security_group" "allow_aurora_access" {
+#   name        = "allow_aurora_access"
+#   description = "Allow EC2 to aurora"
+#   vpc_id = aws_vpc.nf_vpc.id
+
+#   ingress {
+#     from_port   = 3306
+#     to_port     = 3306
+#     protocol    = "tcp"
+#     security_groups = [aws_security_group.ssh_ingress.id] 
+#   }
+
+#   tags = {
+#     Name = "aurora-stack-allow-aurora-MySQL"
+#   }
+# }
