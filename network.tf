@@ -1,5 +1,5 @@
 resource "aws_internet_gateway" "igw" {
-    vpc_id = aws_vpc.nf_vpc.id
+    vpc_id = aws_vpc.vpc.id
 
     tags = {
         Name = "internet gateway"
@@ -7,7 +7,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_route_table" "public_route_table" {
-    vpc_id = aws_vpc.nf_vpc.id
+    vpc_id = aws_vpc.vpc.id
 
     route {
         cidr_block = "0.0.0.0/0"
@@ -24,12 +24,22 @@ resource "aws_route_table_association" "public_subnet_association" {
     route_table_id = aws_route_table.public_route_table.id
 }
 
+resource "aws_route_table_association" "host_subnet_1_association" {
+    subnet_id      = aws_subnet.host_subnet_1.id
+    route_table_id = aws_route_table.public_route_table.id
+}
+
+resource "aws_route_table_association" "host_subnet_2_association" {
+    subnet_id      = aws_subnet.host_subnet_2.id
+    route_table_id = aws_route_table.public_route_table.id
+}
+
 resource "aws_nat_gateway" "nat" {
-    subnet_id           = aws_subnet.private_subnet_1.id
+    subnet_id           = aws_subnet.db_subnet_1.id
     connectivity_type   = "private"
     
     depends_on = [
-      aws_vpc.nf_vpc
+      aws_vpc.vpc
     ]
 
     tags = {
@@ -37,39 +47,29 @@ resource "aws_nat_gateway" "nat" {
     }
 }
 
-resource "aws_route_table" "private_route_table" {
-    vpc_id = aws_vpc.nf_vpc.id
+# resource "aws_route_table" "private_route_table" {
+#     vpc_id = aws_vpc.vpc.id
 
-    depends_on = [
-      aws_vpc.nf_vpc
-    ]
+#     depends_on = [
+#       aws_vpc.vpc
+#     ]
 
-    route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = aws_nat_gateway.nat.id
-    }
+#     route {
+#         cidr_block = "0.0.0.0/0"
+#         gateway_id = aws_nat_gateway.nat.id
+#     }
 
-    tags = {
-        Name = "private route table"
-    }
-}
+#     tags = {
+#         Name = "private route table"
+#     }
+# }
 
-resource "aws_route_table_association" "private_subnet_1_association" {
-    subnet_id      = aws_subnet.private_subnet_1.id
-    route_table_id = aws_route_table.private_route_table.id
-}
+# resource "aws_route_table_association" "db_subnet_1_association" {
+#     subnet_id      = aws_subnet.db_subnet_1.id
+#     route_table_id = aws_route_table.private_route_table.id
+# }
 
-resource "aws_route_table_association" "private_subnet_2_association" {
-    subnet_id      = aws_subnet.private_subnet_2.id
-    route_table_id = aws_route_table.private_route_table.id
-}
-
-resource "aws_route_table_association" "db_subnet_1_association" {
-    subnet_id      = aws_subnet.db_subnet_1.id
-    route_table_id = aws_route_table.private_route_table.id
-}
-
-resource "aws_route_table_association" "db_subnet_2_association" {
-    subnet_id      = aws_subnet.db_subnet_2.id
-    route_table_id = aws_route_table.private_route_table.id
-}
+# resource "aws_route_table_association" "db_subnet_2_association" {
+#     subnet_id      = aws_subnet.db_subnet_2.id
+#     route_table_id = aws_route_table.private_route_table.id
+# }
