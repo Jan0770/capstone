@@ -1,5 +1,5 @@
 resource "aws_rds_cluster" "auroracluster" {
-  cluster_identifier        = "auroracluster"
+  cluster_identifier        = "aurora"
   availability_zones        = var.availability_zones
 
   engine                    = var.aurora_engine
@@ -17,19 +17,19 @@ resource "aws_rds_cluster" "auroracluster" {
   vpc_security_group_ids = [aws_security_group.aurora_security.id]
 
   tags = {
-    Name = "auroracluster"
+    Name = "Aurora"
   }
 }
 
 resource "aws_rds_cluster_instance" "clusterinstance" {
   count              = 2
-  identifier         = "clusterinstance-${count.index}"
+  identifier         = "db-instance-${count.index + 1}"
   cluster_identifier = aws_rds_cluster.auroracluster.id
-  instance_class     = "db.t3.small"
-  engine             = "aurora-mysql"
+  instance_class     = var.database_instance
+  engine             = var.aurora_engine
   availability_zone  = "us-west-2${count.index == 0 ? "a" : "b"}"
 
   tags = {
-    Name = "aurora_${count.index + 1}"
+    Name = "db-instance${count.index + 1}"
   }
 }

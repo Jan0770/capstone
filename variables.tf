@@ -14,6 +14,11 @@ variable "availability_zones" {
     default = ["us-west-2a", "us-west-2b"]
 }
 
+variable "ssh_key" {
+  description = "SSH Key"
+  default     = "vockey"
+}
+
         # VPC # 
 variable "vpc_cidr" {
   description = "CIDR block for the VPC"
@@ -70,9 +75,8 @@ variable "aurora_engine_version" {
     default     = "5.7.mysql_aurora.2.11.1"
 }
 
-variable "ssh_key" {
-  description = "SSH Key"
-  default     = "vockey"
+variable "database_instance" {
+  default = "db.t3.small"
 }
 
         # Database #
