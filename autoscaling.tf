@@ -7,7 +7,8 @@ resource "aws_autoscaling_group" "asg" {
     target_group_arns   = [aws_lb_target_group.target.arn]
     
     depends_on = [
-      aws_security_group.host_security
+      aws_security_group.host_security,
+      aws_rds_cluster_instance.clusterinstance
     ]
 
     launch_template {

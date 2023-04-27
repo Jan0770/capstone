@@ -23,7 +23,6 @@ resource "aws_subnet" "host_subnet_1" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.host_subnet_cidrs[0]
   availability_zone = var.availability_zones[0]
-  # mapping public ip for testing as of now
   map_public_ip_on_launch = true
 
   tags = {
@@ -35,7 +34,6 @@ resource "aws_subnet" "host_subnet_2" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.host_subnet_cidrs[1]
   availability_zone = var.availability_zones[1]
-  # same as above
   map_public_ip_on_launch = true
   tags = {
     Name = "host_subnet_2"
