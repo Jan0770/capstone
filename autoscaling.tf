@@ -22,7 +22,7 @@ resource "aws_launch_template" "launchtemplate" {
     image_id        = var.ami
     instance_type   = var.instance_type
     key_name        = var.ssh_key
-    user_data       =  base64encode(file("dockerWPuserdata.sh"))
+    user_data       =  base64encode(file("dockerMySQL.sh"))
     vpc_security_group_ids = [aws_security_group.host_security.id]
     
     monitoring {
