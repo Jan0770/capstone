@@ -89,10 +89,5 @@ variable "master_user" {
 }
 
 variable "master_password" {
-  default = "mustbeeightcharaters"
-}
-
-        # Docker #
-variable "docker_mysql" {
-  default = "dockeruser"
+  default = "mustbeeightcharacters"
 }

@@ -9,6 +9,13 @@ resource "aws_security_group" "bastion_security" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
   }
+
+  ingress {
+    from_port        = -1
+    to_port          = -1
+    protocol         = "icmp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
   
   egress {
     from_port        = 0
@@ -44,6 +51,13 @@ resource "aws_security_group" "host_security" {
     from_port    = 22
     to_port      = 22
     protocol     = "tcp"
+    cidr_blocks  = ["0.0.0.0/0"]
+  }
+  
+  ingress {
+    from_port    = -1
+    to_port      = -1
+    protocol     = "icmp"
     cidr_blocks  = ["0.0.0.0/0"]
   }
 
