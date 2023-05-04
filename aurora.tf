@@ -23,13 +23,13 @@ resource "aws_rds_cluster" "auroracluster" {
 
 resource "aws_rds_cluster_instance" "clusterinstance" {
   count              = 2
-  identifier         = "db-instance-${count.index + 1}"
+  identifier         = "db-instance-${count.index+1}"
   cluster_identifier = aws_rds_cluster.auroracluster.id
   instance_class     = var.database_instance
   engine             = var.aurora_engine
   availability_zone  = "us-west-2${count.index == 0 ? "a" : "b"}"
 
   tags = {
-    Name = "db-instance${count.index + 1}"
+    Name = "db-instance-${count.index+1}"
   }
 }

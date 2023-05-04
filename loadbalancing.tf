@@ -39,7 +39,7 @@ resource "aws_lb_target_group" "target" {
         port      = 80
         protocol  = "HTTP"
         path      = "/"
-        matcher   = "200"
+        matcher   = "302"
     }
 }
 
