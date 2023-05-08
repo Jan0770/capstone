@@ -12,7 +12,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_out" {
     alarm_actions           = [aws_autoscaling_policy.scale_out_policy.arn]
     
     dimensions = {
-        "AutoScalingGroupName" = "${aws_autoscaling_group.asg.name}"
+        AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
     }
 }
 
@@ -29,23 +29,24 @@ resource "aws_cloudwatch_metric_alarm" "scale_in" {
     alarm_actions           = [aws_autoscaling_policy.scale_in_policy.arn]
     
     dimensions = {
-        "AutoScalingGroupName" = "${aws_autoscaling_group.asg.name}"
+        AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
+    }
+}  
+
+resource "aws_cloudwatch_metric_alarm" "unhealthy_hosts" {
+    alarm_name          = "unhealthy_hosts"
+    comparison_operator = "GreaterThanOrEqualToThreshold"
+    evaluation_periods  = 1
+    metric_name         = "UnHealthyHostCount"
+    namespace           = "AWS/ApplicationELB"
+    period              = 180
+    statistic           = "Minimum"
+    threshold           = 1
+    alarm_description   = "A service server is unhealthy"
+    alarm_actions       = [aws_sns_topic.server_health.arn]
+
+    dimensions = {
+        LoadBalancer = "${join("/", [split("/", "${aws_lb.loadbalancer.arn}")[1], split("/", "${aws_lb.loadbalancer.arn}")[2], split("/", "${aws_lb.loadbalancer.arn}")[3]])}"
+        TargetGroup  = "${element(split(":", aws_lb_target_group.target.arn), 5)}"
     }
 } 
-
-# resource "aws_cloudwatch_metric_alarm" "healthy_hosts" {
-#     alarm_name          = "healthy_hosts"
-#     comparison_operator = "GreaterThanOrEqualToThreshold"
-#     evaluation_periods  = 1
-#     metric_name         = "HealthyHostCount"
-#     namespace           = "AWS/ApplicationELB"
-#     period              = 60
-#     statistic           = "Average"
-#     threshold           = 2
-#     alarm_description   = "Service is healthy and available"
-#     alarm_actions       = [aws_sns_topic.server_health.arn]
-
-#     dimensions = {
-#         "TargetGroup" = "${aws_lb_target_group.target.name}"
-#     }
-# }

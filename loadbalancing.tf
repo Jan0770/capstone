@@ -11,7 +11,7 @@ resource "aws_lb" "loadbalancer" {
 }
 
 resource "aws_lb_listener" "listener" {
-    load_balancer_arn   = aws_lb.loadbalancer.id
+    load_balancer_arn   = aws_lb.loadbalancer.id 
     port                = 80
     protocol            = "HTTP"
 
