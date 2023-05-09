@@ -49,4 +49,4 @@ resource "aws_cloudwatch_metric_alarm" "unhealthy_hosts" {
         LoadBalancer = "${join("/", [split("/", "${aws_lb.loadbalancer.arn}")[1], split("/", "${aws_lb.loadbalancer.arn}")[2], split("/", "${aws_lb.loadbalancer.arn}")[3]])}"
         TargetGroup  = "${element(split(":", aws_lb_target_group.target.arn), 5)}"
     }
-} 
+}  
