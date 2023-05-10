@@ -1,4 +1,4 @@
-# Non-functional via terraform as of now. Looking for a IAM role fix
+# Non-functional due to sandbox restrictions. 
 
 # data "archive_file" "lambda" {
 #   type        = "zip"

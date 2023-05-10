@@ -2,8 +2,7 @@ import boto3
 
 def lambda_handler(event, context):
     try:
-        region = "us-west-2"
-        ec2_client = boto3.client("ec2", region_name=region) 
+        ec2_client = boto3.client("ec2", region_name="us-west-2") 
         elb_client = boto3.client("elbv2")
         
         response = elb_client.describe_target_groups(
