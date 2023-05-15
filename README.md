@@ -32,3 +32,6 @@ occurrence of a failed health check.
 ### Logging and system accessibility
 All system metrics are logged via CloudWatch and CloudTrail and forwarded into an S3 bucket. A separate
 bastion host is provided to enable manual access to the infrastructure if need be. 
+
+
+![capstoneDiagramm](https://github.com/Jan0770/capstoneProject/assets/101402107/58194299-5ed7-44ab-892a-3e5c5bd7bfbf)
