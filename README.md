@@ -29,7 +29,6 @@ occurrence of a failed health check.
 ### Logging and system accessibility
 All system metrics are logged via CloudWatch and CloudTrail and forwarded into an S3 bucket. A separate
 bastion host is provided to enable manual access to the infrastructure if need be. 
-
 <br> 
 
 ### Cost-estimate
