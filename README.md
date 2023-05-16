@@ -31,5 +31,19 @@ All system metrics are logged via CloudWatch and CloudTrail and forwarded into a
 bastion host is provided to enable manual access to the infrastructure if need be. 
 
 <br> 
+### Cost-estimate
+Running this infrastructure in its smallest configuration, read with two host instances, would incur cost of 86.15$/month, compared to 116.15$/month under maximum workload.
+<br>
+
+The calculation was based on the following assumptions:
+- The system is online for 12h a day, 30 days a month.
+- Workload does not require more than 6 host instances
+- Host instance type: t3.small
+- DB instance type: db.t3.medium
+- Database does not exceed 10GB added per month
+- S3 log volume does not exceed 50GB
+
+
+<br>
 
 ![capstoneDiagramm](https://github.com/Jan0770/capstoneProject/assets/101402107/58194299-5ed7-44ab-892a-3e5c5bd7bfbf)
