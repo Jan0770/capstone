@@ -7,6 +7,7 @@ in mind to ensure continuous availability of the deployed resources, while runni
 possible. All code has been written in Terraform.
 
 <br>
+
 The following is a brief summary of the main components that have been used to build this system and
 their functionality therein:
 <br>
@@ -15,7 +16,7 @@ their functionality therein:
 
 To ensure high availability while keeping cost low, the auto-scaling group was configured to launch or stop
 instances according to the given CPU utilisation.The launch template makes use of a Docker image to 
-provide a stable launch process with minimal time between launch and being serviceable.. Load balancing 
+provide a stable launch process with minimal time between launch and being serviceable. Load balancing 
 ensures that incoming traffic is distributed evenly across all active instances. 
 <br>
 
