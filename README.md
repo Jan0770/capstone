@@ -7,7 +7,6 @@ in mind to ensure continuous availability of the deployed resources, while runni
 possible. All code has been written in Terraform.
 
 <br>
-
 The following is a brief summary of the main components that have been used to build this system and
 their functionality therein:
 <br>
