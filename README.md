@@ -31,6 +31,7 @@ All system metrics are logged via CloudWatch and CloudTrail and forwarded into a
 bastion host is provided to enable manual access to the infrastructure if need be. 
 
 <br> 
+
 ### Cost-estimate
 Running this infrastructure in its smallest configuration, read with two host instances, would incur cost of 86.15$/month, compared to 116.15$/month under maximum workload.
 <br>
