@@ -2,7 +2,7 @@
 
 <br>
 The infrastructure, as shown in the diagram below, utilises several AWS components to provide highly 
-reliable access to an Aurora RDS database. The system was designed with scaleability and maintainability 
+reliable access to an Aurora database. The system was designed with scaleability and maintainability 
 in mind to ensure continuous availability of the deployed resources, while running as cost efficient as 
 possible. All code has been written in Terraform.
 
