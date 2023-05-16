@@ -5,12 +5,10 @@ The infrastructure, as shown in the diagram below, utilises several AWS componen
 reliable access to an Aurora RDS database. The system was designed with scaleability and maintainability 
 in mind to ensure continuous availability of the deployed resources, while running as cost efficient as 
 possible. All code has been written in Terraform.
-
 <br>
 
 The following is a brief summary of the main components that have been used to build this system and
 their functionality therein:
-
 <br>
 
 ### Auto-scaling and load balancing
@@ -19,7 +17,6 @@ To ensure high availability while keeping cost low, the auto-scaling group was c
 instances according to the given CPU utilisation.The launch template makes use of a Docker image to 
 provide a stable launch process with minimal time between launch and being serviceable.. Load balancing 
 ensures that incoming traffic is distributed evenly across all active instances. 
-
 <br>
 
 ### Host-monitoring in conjunction with a Lambda function for automated maintenance
@@ -27,7 +24,6 @@ In order to further increase availability, while reducing maintenance effort, Cl
 to monitor instance health in regular short intervals. If any instance should fail the health check, a Lambda
 function is triggered that initiates an instance shut-down. Additionally, SNS notifies any subscribers to the 
 occurrence of a failed health check. 
-
 <br>
 
 ### Logging and system accessibility
