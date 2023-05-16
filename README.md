@@ -19,7 +19,7 @@ To ensure high availability while keeping cost low, the auto-scaling group was c
 instances according to the given CPU utilisation.The launch template makes use of a Docker image to 
 provide a stable launch process with minimal time between launch and being serviceable.. Load balancing 
 ensures that incoming traffic is distributed evenly across all active instances. 
-<br>
+
 <br>
 
 ### Host-monitoring in conjunction with a Lambda function for automated maintenance
@@ -27,7 +27,7 @@ In order to further increase availability, while reducing maintenance effort, Cl
 to monitor instance health in regular short intervals. If any instance should fail the health check, a Lambda
 function is triggered that initiates an instance shut-down. Additionally, SNS notifies any subscribers to the 
 occurrence of a failed health check. 
-<br>
+
 <br>
 
 ### Logging and system accessibility
