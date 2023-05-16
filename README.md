@@ -7,9 +7,10 @@ in mind to ensure continuous availability of the deployed resources, while runni
 possible. All code has been written in Terraform.
 
 <br>
+
 The following is a brief summary of the main components that have been used to build this system and
 their functionality therein:
-<br>
+
 <br>
 
 ### Auto-scaling and load balancing
@@ -33,5 +34,6 @@ occurrence of a failed health check.
 All system metrics are logged via CloudWatch and CloudTrail and forwarded into an S3 bucket. A separate
 bastion host is provided to enable manual access to the infrastructure if need be. 
 
+<br> 
 
 ![capstoneDiagramm](https://github.com/Jan0770/capstoneProject/assets/101402107/58194299-5ed7-44ab-892a-3e5c5bd7bfbf)
